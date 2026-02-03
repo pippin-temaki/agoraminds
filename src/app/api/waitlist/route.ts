@@ -13,8 +13,28 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Valid email required" }, { status: 400 });
     }
 
-    if (!full_name || !type) {
+    // Validate and sanitize inputs
+    const trimmedName = full_name?.trim();
+    const trimmedType = type?.trim();
+    const trimmedMotivation = motivation?.trim() || null;
+    const trimmedReferral = referral_source?.trim() || null;
+
+    if (!trimmedName || !trimmedType) {
       return NextResponse.json({ error: "Full name and type required" }, { status: 400 });
+    }
+
+    // Input length limits
+    if (trimmedName.length > 255) {
+      return NextResponse.json({ error: "Name too long" }, { status: 400 });
+    }
+    if (!["individual", "nonprofit"].includes(trimmedType)) {
+      return NextResponse.json({ error: "Type must be 'individual' or 'nonprofit'" }, { status: 400 });
+    }
+    if (trimmedMotivation && trimmedMotivation.length > 2000) {
+      return NextResponse.json({ error: "Motivation too long (max 2000 chars)" }, { status: 400 });
+    }
+    if (trimmedReferral && trimmedReferral.length > 255) {
+      return NextResponse.json({ error: "Referral source too long" }, { status: 400 });
     }
 
     // If DATABASE_URL is configured, save to Neon Postgres
@@ -22,23 +42,10 @@ export async function POST(req: NextRequest) {
       const { neon } = await import("@neondatabase/serverless");
       const sql = neon(process.env.DATABASE_URL);
 
-      // Create table if not exists
-      await sql`
-        CREATE TABLE IF NOT EXISTS waitlist (
-          id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
-          email VARCHAR(255) UNIQUE NOT NULL,
-          full_name VARCHAR(255) NOT NULL,
-          type VARCHAR(50) NOT NULL CHECK (type IN ('individual','nonprofit')),
-          motivation TEXT,
-          referral_source VARCHAR(255),
-          created_at TIMESTAMPTZ DEFAULT NOW()
-        )
-      `;
-
-      // Insert (ignore duplicates)
+      // Insert (ignore duplicates) — table created via migration, not on every request
       await sql`
         INSERT INTO waitlist (email, full_name, type, motivation, referral_source)
-        VALUES (${normalizedEmail}, ${full_name}, ${type}, ${motivation || null}, ${referral_source || null})
+        VALUES (${normalizedEmail}, ${trimmedName}, ${trimmedType}, ${trimmedMotivation}, ${trimmedReferral})
         ON CONFLICT (email) DO NOTHING
       `;
     } else {
