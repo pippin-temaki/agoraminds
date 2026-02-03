@@ -44,9 +44,15 @@ export default function AdminPage() {
         setLoading(false);
         return;
       }
+      if (!res.ok) {
+        const errData = await res.json().catch(() => ({}));
+        setError(errData.error || `Server error (${res.status})`);
+        setLoading(false);
+        return;
+      }
       const data = await res.json();
-      setEntries(data.entries);
-      setTotal(data.total);
+      setEntries(data.entries || []);
+      setTotal(data.total || 0);
       setAuthenticated(true);
       sessionStorage.setItem("admin_password", pw);
     } catch {
