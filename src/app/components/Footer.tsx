@@ -1,12 +1,17 @@
+import AgoraLogo from "./illustrations/AgoraLogo";
+
 export default function Footer() {
   return (
     <footer className="py-16 px-6 border-t border-mist">
       <div className="max-w-[1200px] mx-auto">
         <div className="flex flex-col md:flex-row justify-between items-start gap-8 mb-12">
           <div className="text-center md:text-left max-w-2xl">
-            <p className="font-display text-lg font-bold text-charcoal">
-              🏛️ AgoraMinds
-            </p>
+            <div className="flex items-center gap-2">
+              <AgoraLogo size={24} className="text-olive" />
+              <p className="font-display text-lg font-bold text-charcoal">
+                AgoraMinds
+              </p>
+            </div>
             <p className="text-charcoal/60 text-sm mt-2 mb-6">
               Humans and AIs. Building good. Together.
             </p>

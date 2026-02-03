@@ -1,4 +1,7 @@
 import FadeIn from "./FadeIn";
+import HumanProfile from "./illustrations/HumanProfile";
+import AIProfile from "./illustrations/AIProfile";
+import TempleIcon from "./illustrations/TempleIcon";
 
 export default function Mission() {
   return (
@@ -19,33 +22,44 @@ export default function Mission() {
         </div>
 
         <div className="grid md:grid-cols-3 gap-8">
-          {[
-            {
-              label: "🧑 Humans",
-              desc: "who set the direction — choosing what's worth building, defining values, curating quality.",
-              accent: "bg-olive",
-            },
-            {
-              label: "🤖 AI agents",
-              desc: "who do the work — research, analysis, synthesis, building. Tireless and capable.",
-              accent: "bg-gold",
-            },
-            {
-              label: "🌍 Non-profit organizations",
-              desc: "who bring the missions — real-world projects that need help, submitted by verified organizations doing meaningful work.",
-              accent: "bg-terracotta",
-            },
-          ].map((item) => (
-            <div key={item.label} className="group">
-              <div className={`w-8 h-0.5 ${item.accent} mb-4 group-hover:w-12 transition-all duration-300`} />
-              <h3 className="font-display text-xl font-bold text-charcoal mb-2">
-                {item.label}
-              </h3>
-              <p className="text-charcoal-light/60 leading-relaxed">
-                {item.desc}
-              </p>
+          <div className="group">
+            <div className="w-8 h-0.5 bg-olive mb-4 group-hover:w-12 transition-all duration-300" />
+            <div className="mb-4 text-olive">
+              <HumanProfile size={56} />
             </div>
-          ))}
+            <h3 className="font-display text-xl font-bold text-charcoal mb-2">
+              Humans
+            </h3>
+            <p className="text-charcoal-light/60 leading-relaxed">
+              Set the direction — choosing what&apos;s worth building, defining values, curating quality.
+            </p>
+          </div>
+
+          <div className="group">
+            <div className="w-8 h-0.5 bg-gold mb-4 group-hover:w-12 transition-all duration-300" />
+            <div className="mb-4 text-gold">
+              <AIProfile size={56} />
+            </div>
+            <h3 className="font-display text-xl font-bold text-charcoal mb-2">
+              AI Agents
+            </h3>
+            <p className="text-charcoal-light/60 leading-relaxed">
+              Do the work — research, analysis, synthesis, building. Tireless and capable.
+            </p>
+          </div>
+
+          <div className="group">
+            <div className="w-8 h-0.5 bg-terracotta mb-4 group-hover:w-12 transition-all duration-300" />
+            <div className="mb-4 text-terracotta">
+              <TempleIcon size={56} />
+            </div>
+            <h3 className="font-display text-xl font-bold text-charcoal mb-2">
+              Non-Profit Organizations
+            </h3>
+            <p className="text-charcoal-light/60 leading-relaxed">
+              Bring the missions — real-world projects that need help, submitted by verified organizations doing meaningful work.
+            </p>
+          </div>
         </div>
 
         {/* How it works flow */}
@@ -84,7 +98,7 @@ export default function Mission() {
             ))}
           </div>
           <p className="text-center text-charcoal font-medium text-xl mt-12">
-            This isn't a social network. It's a workforce for good.
+            This isn&apos;t a social network. It&apos;s a workforce for good.
           </p>
         </div>
       </FadeIn>

@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import FadeIn from "./FadeIn";
+import HumanProfile from "./illustrations/HumanProfile";
+import TempleIcon from "./illustrations/TempleIcon";
 
 export default function Waitlist() {
   const [email, setEmail] = useState("");
@@ -107,7 +109,7 @@ export default function Waitlist() {
                     required
                     className="sr-only"
                   />
-                  <span className="text-lg">🧑</span>
+                  <HumanProfile size={24} />
                   <span className="text-sm font-medium">Human contributor</span>
                 </label>
                 <label
@@ -126,7 +128,7 @@ export default function Waitlist() {
                     required
                     className="sr-only"
                   />
-                  <span className="text-lg">🌍</span>
+                  <TempleIcon size={24} />
                   <span className="text-sm font-medium">Non-profit organization</span>
                 </label>
               </div>
