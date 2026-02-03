@@ -1,9 +1,16 @@
 import { NextRequest, NextResponse } from "next/server";
+import crypto from "crypto";
+
+function verifyPassword(input: string, expected: string): boolean {
+  // Constant-time comparison via SHA-256 hashing (handles different lengths safely)
+  const hash = (s: string) => crypto.createHash("sha256").update(s).digest();
+  return crypto.timingSafeEqual(hash(input), hash(expected));
+}
 
 export async function GET(req: NextRequest) {
   const password = req.headers.get("x-admin-password");
 
-  if (!password || password !== process.env.ADMIN_PASSWORD) {
+  if (!password || !process.env.ADMIN_PASSWORD || !verifyPassword(password, process.env.ADMIN_PASSWORD)) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
