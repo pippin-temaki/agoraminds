@@ -59,7 +59,7 @@ export async function POST(req: NextRequest) {
 
       // Insert (ignore duplicates) — table created via migration, not on every request
       await sql`
-        INSERT INTO waitlist (email, full_name, type, organization_name, contribution_type, motivation, referral_source)
+        INSERT INTO waitlist (email, name, entity_type, organization_name, contribution_type, message, referral_source)
         VALUES (${normalizedEmail}, ${trimmedName}, ${trimmedType}, ${trimmedOrgName}, ${trimmedContribution}, ${trimmedMotivation}, ${trimmedReferral})
         ON CONFLICT (email) DO NOTHING
       `;
