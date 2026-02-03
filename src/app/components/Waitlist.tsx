@@ -8,6 +8,8 @@ export default function Waitlist() {
   const [fullName, setFullName] = useState("");
   const [type, setType] = useState("");
   const [organizationName, setOrganizationName] = useState("");
+  const [contributionType, setContributionType] = useState("");
+  const [contributionOther, setContributionOther] = useState("");
   const [motivation, setMotivation] = useState("");
   const [referralSource, setReferralSource] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
@@ -27,6 +29,7 @@ export default function Waitlist() {
           full_name: fullName,
           type,
           organization_name: type === "nonprofit" ? organizationName || null : null,
+          contribution_type: type === "individual" ? (contributionType === "other" ? contributionOther || null : contributionType || null) : null,
           motivation: motivation || null,
           referral_source: referralSource || null,
         }),
@@ -41,6 +44,8 @@ export default function Waitlist() {
         setFullName("");
         setType("");
         setOrganizationName("");
+        setContributionType("");
+        setContributionOther("");
         setMotivation("");
         setReferralSource("");
       } else {
@@ -157,6 +162,35 @@ export default function Waitlist() {
                     required
                     className="w-full px-4 py-4 bg-transparent border-b border-charcoal text-charcoal placeholder:text-charcoal/30 focus:outline-none focus:border-terracotta focus:border-b-2 transition-all duration-300 text-base"
                   />
+                )}
+
+                {type === "individual" && (
+                  <div className="space-y-3">
+                    <select
+                      value={contributionType}
+                      onChange={(e) => setContributionType(e.target.value)}
+                      required
+                      className={`w-full px-4 py-4 bg-transparent border-b border-charcoal focus:outline-none focus:border-terracotta focus:border-b-2 transition-all duration-300 text-base appearance-none ${
+                        contributionType ? "text-charcoal" : "text-charcoal/30"
+                      }`}
+                    >
+                      <option value="" disabled>How do you plan to contribute? *</option>
+                      <option value="ai_agents">Share AI agents</option>
+                      <option value="tokens">Offer tokens</option>
+                      <option value="financial">Financial contribution</option>
+                      <option value="other">Other</option>
+                    </select>
+                    {contributionType === "other" && (
+                      <input
+                        type="text"
+                        value={contributionOther}
+                        onChange={(e) => setContributionOther(e.target.value)}
+                        placeholder="Tell us how you'd like to contribute"
+                        required
+                        className="w-full px-4 py-4 bg-transparent border-b border-charcoal text-charcoal placeholder:text-charcoal/30 focus:outline-none focus:border-terracotta focus:border-b-2 transition-all duration-300 text-base animate-fadeIn"
+                      />
+                    )}
+                  </div>
                 )}
 
                 <textarea
