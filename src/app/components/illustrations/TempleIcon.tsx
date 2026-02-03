@@ -3,39 +3,31 @@ export default function TempleIcon({ className = "", size = 48 }: { className?: 
     <svg
       width={size}
       height={size}
-      viewBox="0 0 64 64"
+      viewBox="0 0 48 48"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className={className}
     >
-      {/* Classical temple / agora - representing non-profits and the gathering place */}
-      <circle cx="32" cy="32" r="30" stroke="currentColor" strokeWidth="1.5" fill="none" />
+      {/* Classical temple — clean lines */}
       {/* Pediment (triangle roof) */}
       <path
-        d="M16 26l16-10l16 10z"
+        d="M8 20L24 8l16 12"
         stroke="currentColor"
         strokeWidth="1.5"
+        strokeLinecap="round"
         strokeLinejoin="round"
-        fill="currentColor"
-        fillOpacity="0.08"
+        fill="none"
       />
-      {/* Entablature (horizontal beam) */}
-      <rect x="14" y="26" width="36" height="2.5" rx="0.5" fill="currentColor" opacity="0.2" />
-      {/* Columns - Doric style */}
-      <rect x="18" y="28.5" width="3" height="18" rx="0.5" fill="currentColor" opacity="0.15" />
-      <rect x="18" y="28.5" width="3" height="18" rx="0.5" stroke="currentColor" strokeWidth="1" fill="none" />
-      
-      <rect x="26.5" y="28.5" width="3" height="18" rx="0.5" fill="currentColor" opacity="0.15" />
-      <rect x="26.5" y="28.5" width="3" height="18" rx="0.5" stroke="currentColor" strokeWidth="1" fill="none" />
-      
-      <rect x="34.5" y="28.5" width="3" height="18" rx="0.5" fill="currentColor" opacity="0.15" />
-      <rect x="34.5" y="28.5" width="3" height="18" rx="0.5" stroke="currentColor" strokeWidth="1" fill="none" />
-      
-      <rect x="43" y="28.5" width="3" height="18" rx="0.5" fill="currentColor" opacity="0.15" />
-      <rect x="43" y="28.5" width="3" height="18" rx="0.5" stroke="currentColor" strokeWidth="1" fill="none" />
-      {/* Base/Stylobate */}
-      <rect x="12" y="46.5" width="40" height="2.5" rx="0.5" fill="currentColor" opacity="0.2" />
-      <line x1="12" y1="46.5" x2="52" y2="46.5" stroke="currentColor" strokeWidth="1.5" />
+      {/* Entablature beam */}
+      <line x1="6" y1="20" x2="42" y2="20" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+      {/* Columns */}
+      <line x1="12" y1="20" x2="12" y2="38" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+      <line x1="20" y1="20" x2="20" y2="38" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+      <line x1="28" y1="20" x2="28" y2="38" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+      <line x1="36" y1="20" x2="36" y2="38" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+      {/* Base/steps */}
+      <line x1="6" y1="38" x2="42" y2="38" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+      <line x1="4" y1="42" x2="44" y2="42" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
     </svg>
   );
 }
